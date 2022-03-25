@@ -34,7 +34,7 @@ ResultSet resultSet2=null;
 <td>Lastname</td>
 <td>Date of Birth</td>
 <td>Contact</td>
-
+<td>Action</td>
 </tr>
 <%
 try{
@@ -52,7 +52,7 @@ while(resultSet.next()){
 <td><%=resultSet.getString("LastName") %></td>
 <td><%=resultSet.getString("DOB") %></td>
 <td><%=resultSet.getString("Contact") %></td>
-
+<td><a href="delete.jsp?id=<%=resultSet.getString("MIS") %>"><button id=<%=resultSet.getString("MIS") %> type="button"  action="delete" method="post">Delete</button></a>
 
 </tr>
 <%
@@ -65,7 +65,9 @@ e.printStackTrace();
 </table> 
 
 
+<br/>
 
+<br/>
 <table border="1">
 <tr>
 <td>MIS</td>
@@ -74,7 +76,7 @@ e.printStackTrace();
 <td>T1</td>
 <td>T2</td>
 <td>End Sem</td>
-
+<td>Total Marks</td>
 </tr>
 <%
 try{
@@ -82,8 +84,11 @@ connection = DriverManager.getConnection(connectionUrl+database, userid, passwor
 statement=connection.createStatement();
 String sql2="select * from studentMarks";
 resultSet = statement.executeQuery(sql2);
+
+
 while(resultSet.next()){
 %>
+
 <tr>
 
 <td><%=resultSet.getString("MIS") %></td>
@@ -92,7 +97,16 @@ while(resultSet.next()){
 <td><%=resultSet.getString("T1") %></td>
 <td><%=resultSet.getString("T2") %></td>
 <td><%=resultSet.getString("End_sem") %></td>
+<td><%
+int x,y,z;
+x=Integer.parseInt(resultSet.getString("T1"));
+y=Integer.parseInt(resultSet.getString("T2"));
+z=Integer.parseInt(resultSet.getString("End_sem"));
+out.print(x+y+z);
 
+%></td>
+
+<td><
 </tr>
 <%
 }
@@ -102,7 +116,6 @@ e.printStackTrace();
 }
 %>
 </table> 
-
 
 
 
